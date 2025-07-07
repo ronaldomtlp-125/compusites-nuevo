@@ -29,29 +29,35 @@ document.getElementById("form-agregar-usuario").addEventListener("submit", funct
         },
         body: JSON.stringify(nuevoUsuario)
     })
-    .then(response => {
+    .then(async response => {
+        const data = await response.text();
+
         if (!response.ok) {
-            throw new Error("Error al registrar el usuario");
+            // No cerrar el modal si hay error
+            throw new Error(data);
         }
-        return response.json();
+
+        return data;
     })
     .then(data => {
-        cerrarModal();
+        // Solo aquí cerramos el modal si fue exitoso
         Swal.fire({
             icon: 'success',
             title: 'Usuario registrado',
-            text: 'El usuario fue registrado correctamente',
+            text: data,
             confirmButtonColor: '#198754'
         }).then(() => {
-            location.reload();
+            form.reset(); //limpiar formulario
+            cerrarModal(); // //metodo del script "cargar-usuarios.js"
+            cargarUsuarios(); //metodo del script "cargar-usuarios.js"
         });
     })
     .catch(error => {
-        console.error("Error:", error);
         Swal.fire({
             icon: 'error',
-            title: 'Error',
-            text: 'Hubo un problema al registrar el usuario'
+            title: 'Error al registrar',
+            text: error.message || "Hubo un problema al registrar el usuario",
+            confirmButtonColor: '#dc3545'
         });
     });
 });

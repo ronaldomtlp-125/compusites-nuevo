@@ -54,9 +54,24 @@ public class UsuarioController {
 	
 	
 	//REGISTRAR USUARIO
+	/*
 	@PostMapping("/registrar")
 	public Usuario registrarUsuario(@RequestBody UsuarioRegistrarDto dto) {
+		
+		
 		return usuarioService.registrarUsuario(dto);
+	}*/
+	
+	@PostMapping("/registrar")
+	public ResponseEntity<?> registrarUsuario(@RequestBody UsuarioRegistrarDto dto) {
+		Usuario usuario = usuarioService.buscarPorUsuario(dto.getUsuario());
+		
+		if(usuario != null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El nombre de usuario '" + dto.getUsuario() + "' ya existe en el sistema, elija otro");
+		}
+		
+		usuarioService.registrarUsuario(dto);
+		return ResponseEntity.ok("Usuario creado correctamente");
 	}
 	
 	//INICIAR SESION USUARIO

@@ -1,7 +1,7 @@
 //Si alguien ya esta logeado, no tengo que logearse de nuevo
 const usuario = JSON.parse(localStorage.getItem("usuario"));
 if (usuario) {
-    window.location.href = "inicio-administrador.html";
+    window.location.href = "admin-inicio.html";
 }
 
 document.getElementById("iniciarSesion-formulario").addEventListener("submit", async function (e) {

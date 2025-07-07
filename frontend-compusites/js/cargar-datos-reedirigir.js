@@ -18,15 +18,15 @@ if (!usuario) {
     document.getElementById("usuario").textContent = usuario.usuario;
     document.getElementById("nombres").textContent = usuario.nombres;
 
-    //Alerta simple al lado superor derecho para notificacións sencilla
-    Swal.fire({
-        toast: true,
-        position: 'top-end',
-        icon: 'success',
-        title: `Sesión iniciada como '${usuario.nombres}'`,
-        showConfirmButton: false,
-        timer: 3000
-    });
+    // //Alerta simple al lado superor derecho para notificacións sencilla
+    // Swal.fire({
+    //     toast: true,
+    //     position: 'top-end',
+    //     icon: 'success',
+    //     title: `Sesión iniciada como '${usuario.nombres}'`,
+    //     showConfirmButton: false,
+    //     timer: 3000
+    // });
 }
 
 //Declara esto fuera de cualquier bloque para hacerlo de alcance total, para activar el boton de cerrar sesion.
